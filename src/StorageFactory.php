@@ -310,6 +310,7 @@ final class StorageFactory
 
         if ($options !== []) {
             if (! $options instanceof Storage\Plugin\PluginOptions) {
+                /** @psalm-suppress PossiblyInvalidArgument */
                 $options = new PluginOptions($options);
             }
             $plugin->setOptions($options);
