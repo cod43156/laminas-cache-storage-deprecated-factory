@@ -310,13 +310,25 @@ final class StorageFactory
 
         if ($options !== []) {
             if (! $options instanceof Storage\Plugin\PluginOptions) {
-                /** @psalm-suppress PossiblyInvalidArgument */
-                $options = new PluginOptions($options);
+                $options = new PluginOptions(self::convertArrayToIterable($options));
             }
             $plugin->setOptions($options);
         }
 
         return $plugin;
+    }
+
+    /**
+     * Convert a non-empty-array<array-key, mixed> to iterable<string, mixed>
+     *
+     * @param non-empty-array<array-key, mixed> $array
+     * @return iterable<string, mixed>
+     */
+    private static function convertArrayToIterable(array $array): iterable {
+        /** @var mixed $value */
+        foreach ($array as $key => $value) {
+            yield (string)$key => $value;
+        }
     }
 
     public static function getPluginManager(): Storage\PluginManager
