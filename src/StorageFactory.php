@@ -324,10 +324,11 @@ final class StorageFactory
      * @param non-empty-array<array-key, mixed> $array
      * @return iterable<string, mixed>
      */
-    private static function convertArrayToIterable(array $array): iterable {
+    private static function convertArrayToIterable(array $array): iterable
+    {
         /** @var mixed $value */
         foreach ($array as $key => $value) {
-            yield (string)$key => $value;
+            yield (string) $key => $value;
         }
     }
 
